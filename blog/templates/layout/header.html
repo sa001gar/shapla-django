@@ -1,0 +1,82 @@
+<!-- Navigation Bar -->
+<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-cream/80 border-b border-ink/10">
+    <div class="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-3 cursor-pointer group z-50" onclick="router('home')">
+            <div
+                class="w-8 h-8 bg-ink rounded-md flex items-center justify-center text-cream shadow-sm group-hover:bg-ink/90 transition-colors">
+                <span class="font-serif font-bold text-lg italic leading-none pt-1">P</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-bengali font-bold text-ink text-xl leading-none tracking-tight">পত্রিকা</span>
+            </div>
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-8">
+            <button onclick="router('home')"
+                class="text-charcoal hover:text-ink text-sm font-medium transition-colors">প্রচ্ছদ</button>
+            <button onclick="router('category')"
+                class="text-charcoal hover:text-ink text-sm font-medium transition-colors">গল্প</button>
+            <button onclick="router('category')"
+                class="text-charcoal hover:text-ink text-sm font-medium transition-colors">কবিতা</button>
+            <button onclick="router('category')"
+                class="text-charcoal hover:text-ink text-sm font-medium transition-colors">প্রবন্ধ</button>
+            <button onclick="router('authors')"
+                class="text-charcoal hover:text-ink text-sm font-medium transition-colors">লেখকবৃন্দ</button>
+        </nav>
+
+        <!-- Actions -->
+        <div class="hidden md:flex items-center gap-4">
+            <div class="flex items-center gap-1 bg-white/50 border border-ink/10 rounded-full px-1 py-1">
+                <button id="btn-reader" onclick="switchRole('reader')"
+                    class="px-3 py-1 rounded-full text-xs font-semibold bg-ink text-white shadow-sm transition-all">Reader</button>
+                <button id="btn-admin" onclick="switchRole('admin')"
+                    class="px-3 py-1 rounded-full text-xs font-semibold text-charcoal hover:bg-stone-200/50 transition-all">Admin</button>
+            </div>
+            <button class="text-charcoal hover:text-ink transition-colors">
+                <iconify-icon icon="lucide:search" width="20" stroke-width="1.5"></iconify-icon>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="md:hidden z-50 text-charcoal p-1" onclick="toggleMobileMenu()">
+            <iconify-icon id="menu-icon" icon="lucide:menu" width="24" stroke-width="1.5"></iconify-icon>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu"
+    class="fixed inset-0 z-40 bg-cream/98 backdrop-blur-xl menu-hidden flex flex-col pt-24 px-8 pb-8 md:hidden">
+    <nav class="flex flex-col gap-6 text-2xl font-bengali font-bold text-charcoal">
+        <button onclick="router('home'); toggleMobileMenu()"
+            class="text-left hover:text-ink transition-colors">প্রচ্ছদ</button>
+        <button onclick="router('category'); toggleMobileMenu()" class="text-left hover:text-ink transition-colors">গল্প
+            সংকলন</button>
+        <button onclick="router('category'); toggleMobileMenu()"
+            class="text-left hover:text-ink transition-colors">কবিতা</button>
+        <button onclick="router('category'); toggleMobileMenu()"
+            class="text-left hover:text-ink transition-colors">প্রবন্ধ ও নিবন্ধ</button>
+        <button onclick="router('authors'); toggleMobileMenu()"
+            class="text-left hover:text-ink transition-colors">লেখকবৃন্দ</button>
+    </nav>
+
+    <div class="mt-auto border-t border-ink/10 pt-8 space-y-6">
+        <div class="flex items-center gap-3">
+            <span class="text-sm font-serif text-stone/50 uppercase tracking-widest">View Mode</span>
+            <div class="flex items-center gap-2">
+                <button onclick="switchRole('reader'); toggleMobileMenu()"
+                    class="text-sm font-semibold text-ink underline underline-offset-4">Reader</button>
+                <button onclick="switchRole('admin'); toggleMobileMenu()"
+                    class="text-sm font-semibold text-stone/60 hover:text-charcoal">Admin</button>
+            </div>
+        </div>
+        <div class="flex gap-6 text-stone/40">
+            <iconify-icon icon="lucide:facebook" width="24"></iconify-icon>
+            <iconify-icon icon="lucide:twitter" width="24"></iconify-icon>
+            <iconify-icon icon="lucide:instagram" width="24"></iconify-icon>
+        </div>
+    </div>
+</div>

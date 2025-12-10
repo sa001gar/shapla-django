@@ -1,0 +1,58 @@
+@import "tailwindcss";
+/* Tailwind v4 Full build config */
+
+@theme {
+  /* Colors */
+  --color-ink: #AA1C1C;
+  --color-cream: #FFF6E9;
+  --color-paper: #FFFCF5;
+  --color-charcoal: #2A2A2A;
+  --color-stone: #57534E;
+  --color-gold: #C59D5F;
+
+  /* Fonts */
+  --font-bengali: "Noto Sans Bengali", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* Keyframes from your config */
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Equivalent animation utilities */
+
+@utility animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+@utility animate-slide-in {
+  animation: slide-in 0.3s ease-out forwards;
+}
+
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+@source "../../../**/*.{html,py,js}";
