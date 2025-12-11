@@ -1,6 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+ {% block content %}
  <!-- ================= VIEW: SINGLE POST ================= -->
     <section id="view-post" class="page-transition">
-        <div class="max-w-[720px] mx-auto">
+        <div class="max-w-[900px] mx-auto">
             <div class="flex items-center gap-2 text-xs text-stone/50 mb-8 font-serif">
                 <span class="hover:text-ink cursor-pointer" onclick="router('home')">Home</span>
                 <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
@@ -91,3 +95,4 @@
             </div>
         </div>
     </section>
+    {% endblock %}
