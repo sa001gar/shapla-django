@@ -52,8 +52,8 @@ def category(request, slug):
     }
     return render(request, 'pages/categories.html', context)
 
-def post(request, slug):
-    post = get_object_or_404(Post, slug=slug)
+def post(request, category_slug, post_slug):
+    post = get_object_or_404(Post, slug=post_slug, category__slug=category_slug)
     related_posts = Post.objects.filter(category=post.category).exclude(id=post.id)[:2]
     context = {
         'post': post,

@@ -1,142 +1,89 @@
-
 {% extends "base.html" %}
 
 {% block content %}
-<!-- ================= VIEW: CATEGORY / ARCHIVE ================= -->
-    <section id="view-category" class="page-transition">
-        <div class="flex flex-col md:flex-row gap-12 items-start">
+<section id="category-posts" class="page-transition w-full max-w-7xl mx-auto">
+    <!-- Category Header -->
+    <div class="mb-12 border-b border-stone-200 pb-8 flex flex-col md:flex-row justify-between items-baseline gap-4">
+        <div class="flex items-baseline gap-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-ink tracking-tight font-serif">{{ category.name }}</h1>
+            <span class="px-3 py-1 bg-[#AA1C1C]/10 text-[#AA1C1C] rounded-full text-xs font-medium border border-[#AA1C1C]/20">
+                {{ posts.paginator.count }} টি লেখা
+            </span>
+        </div>
+        
+        <!-- Optional: Simple Breadcrumb or Date -->
+        <span class="text-stone-400 text-sm font-serif">{% now "j F, Y" %}</span>
+    </div>
 
-            <!-- Filters Sidebar -->
-            <aside class="w-full md:w-64 shrink-0 space-y-8 sticky top-24">
-                <div>
-                    <h3 class="text-xs font-bold text-stone/40 uppercase tracking-widest mb-4">Categories</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center">
-                            <input type="checkbox" id="cat-poem" class="custom-checkbox peer" checked="">
-                            <label for="cat-poem"
-                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">কবিতা
-                                (Poetry)</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="cat-story" class="custom-checkbox peer" checked="">
-                            <label for="cat-story"
-                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">গল্প
-                                (Stories)</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="cat-essay" class="custom-checkbox peer">
-                            <label for="cat-essay"
-                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">প্রবন্ধ
-                                (Essays)</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="cat-novel" class="custom-checkbox peer">
-                            <label for="cat-novel"
-                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">উপন্যাস
-                                (Novels)</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-xs font-bold text-stone/40 uppercase tracking-widest mb-4">Time Period</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center">
-                            <input type="checkbox" id="year-2024" class="custom-checkbox peer" checked="">
-                            <label for="year-2024"
-                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">2024</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="year-2023" class="custom-checkbox peer">
-                            <label for="year-2023"
-                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">2023</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="year-old" class="custom-checkbox peer">
-                            <label for="year-old"
-                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">Archived</label>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- List Content -->
-            <div class="grow w-full">
-                <div class="mb-6 flex items-baseline justify-between border-b border-ink/10 pb-4">
-                    <h1 class="text-3xl font-bold text-ink tracking-tight">{{ category.name }}</h1>
-                    <span class="text-xs font-serif text-stone/50 italic">Showing {{ posts.paginator.count }} results</span>
-                </div>
-
-                <div class="space-y-6">
-                    {% for post in posts %}
-                    <article
-                        class="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start p-4 -mx-4 rounded-xl hover:bg-white/60 hover:shadow-sm transition-all cursor-pointer"
-                        onclick="window.location.href='{% url 'post' post.slug %}'">
-                        <div class="w-full sm:w-48 aspect-3/2 bg-stone-200 rounded-lg overflow-hidden shrink-0">
-                             {% if post.post_image %}
-                            <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
-                            {% else %}
-                            <div
-                                class="w-full h-full bg-linear-to-br from-stone-100 to-stone-50 flex items-center justify-center">
-                                <iconify-icon icon="lucide:book-open" class="text-stone/20" width="32"></iconify-icon>
-                            </div>
-                            {% endif %}
-                        </div>
-                        <div class="grow">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span
-                                    class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-blue-50 text-blue-600">{{ post.category.name }}</span>
-                                <span class="text-xs text-stone/40 font-serif">{{ post.created_at|date:"M d, Y" }}</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-charcoal group-hover:text-ink transition-colors mb-2">
-                                {{ post.title }}</h3>
-                            <!-- Displaying a snippet of text - might need strip_tags if rich text -->
-                             <!-- Simplified for now -->
-                             <div class="text-sm text-stone/60 line-clamp-2 mb-3">{{ post.description }}</div>
-                            
-                            <div class="flex items-center gap-2 text-xs font-medium text-stone/50">
-                                {% if post.author.author_image %}
-                                <img src="{{ post.author.author_image.url }}" class="w-5 h-5 rounded-full" alt="avatar">
-                                {% else %}
-                                <img src="https://api.dicebear.com/7.x/notionists/svg?seed={{ post.author.name }}"
-                                    class="w-5 h-5 rounded-full" alt="avatar">
-                                {% endif %}
-                                <span>{{ post.author.name }}</span>
-                            </div>
-                        </div>
-                    </article>
-                    {% empty %}
-                    <div class="text-center py-12 text-stone-400">No posts found in this category.</div>
-                    {% endfor %}
-                </div>
-
-                <!-- Pagination -->
-                <!-- Pagination -->
-                {% if posts.has_other_pages %}
-                <div class="flex justify-center gap-2 mt-12">
-                     {% if posts.has_previous %}
-                    <a href="?page={{ posts.previous_page_number }}"
-                        class="w-8 h-8 flex items-center justify-center rounded border border-ink/10 text-stone-500 hover:bg-white hover:text-ink transition-colors"><iconify-icon
-                            icon="lucide:chevron-left" width="16"></iconify-icon></a>
-                     {% endif %}
-
-                     {% for i in posts.paginator.page_range %}
-                        {% if posts.number == i %}
-                        <span class="w-8 h-8 flex items-center justify-center rounded bg-ink text-white font-serif text-sm">{{ i }}</span>
-                        {% else %}
-                        <a href="?page={{ i }}"
-                            class="w-8 h-8 flex items-center justify-center rounded border border-ink/10 text-stone-500 hover:bg-white hover:text-ink transition-colors font-serif text-sm">{{ i }}</a>
-                        {% endif %}
-                     {% endfor %}
-
-                     {% if posts.has_next %}
-                    <a href="?page={{ posts.next_page_number }}"
-                        class="w-8 h-8 flex items-center justify-center rounded border border-ink/10 text-stone-500 hover:bg-white hover:text-ink transition-colors"><iconify-icon
-                            icon="lucide:chevron-right" width="16"></iconify-icon></a>
-                     {% endif %}
+    <!-- Posts Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        {% for post in posts %}
+        <article class="group cursor-pointer flex flex-col h-full" onclick="window.location.href='{% url 'post' post.category.slug post.slug %}'">
+            <!-- Image -->
+            <div class="relative overflow-hidden rounded-xl bg-stone-100 aspect-[16/10] mb-6 border border-stone-200 shadow-sm group-hover:shadow-md transition-all duration-300">
+                {% if post.post_image %}
+                <img src="{{ post.post_image.url }}" alt="{{ post.title }}" 
+                     class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700">
+                {% else %}
+                <div class="flex items-center justify-center w-full h-full text-stone-300 bg-stone-50">
+                    <iconify-icon icon="lucide:image" width="48"></iconify-icon>
                 </div>
                 {% endif %}
+                
+                <!-- Overlay badge for 'Latest' or similar could go here -->
             </div>
+
+            <!-- Content -->
+            <div class="flex flex-col grow">
+                <h2 class="text-2xl font-bold text-ink mb-3 group-hover:text-[#AA1C1C] transition-colors leading-tight font-serif">
+                    {{ post.title }}
+                </h2>
+                
+                <p class="text-stone-600 flex-grow mb-4 text-justify line-clamp-3 leading-relaxed text-sm font-light">
+                    {{ post.description|default:post.post_text|striptags|truncatewords:25 }}
+                </p>
+
+                <div class="flex items-center gap-2 text-xs text-stone-400 font-medium pt-4 border-t border-stone-100 mt-auto">
+                    <iconify-icon icon="lucide:clock" width="14"></iconify-icon>
+                    <span>{{ post.created_at|date:"j F, Y" }}</span>
+                </div>
+            </div>
+        </article>
+        {% empty %}
+        <div class="col-span-full py-20 text-center bg-stone-50 rounded-2xl border border-stone-100">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-stone-100 mb-4">
+                <iconify-icon icon="lucide:file-x" class="text-stone-400" width="32"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-medium text-ink">কোনো লেখা পাওয়া যায়নি</h3>
+            <p class="text-stone-500 mt-1">এই বিভাগে এখনও কোনো লেখা যোগ করা হয়নি।</p>
         </div>
-    </section>
-    {% endblock %}
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if posts.has_other_pages %}
+    <div class="flex justify-center gap-2 mt-16 border-t border-stone-100 pt-8">
+            {% if posts.has_previous %}
+        <a href="?page={{ posts.previous_page_number }}"
+            class="w-10 h-10 flex items-center justify-center rounded-full border border-stone-200 text-stone-500 hover:bg-[#AA1C1C] hover:text-white hover:border-[#AA1C1C] transition-colors"><iconify-icon
+                icon="lucide:chevron-left" width="18"></iconify-icon></a>
+            {% endif %}
+
+            {% for i in posts.paginator.page_range %}
+            {% if posts.number == i %}
+            <span class="w-10 h-10 flex items-center justify-center rounded-full bg-[#AA1C1C] text-white font-serif text-sm font-medium shadow-md shadow-[#AA1C1C]/20">{{ i }}</span>
+            {% else %}
+            <a href="?page={{ i }}"
+                class="w-10 h-10 flex items-center justify-center rounded-full border border-stone-200 text-stone-500 hover:bg-white hover:text-[#AA1C1C] hover:border-[#AA1C1C] transition-colors font-serif text-sm">{{ i }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}"
+            class="w-10 h-10 flex items-center justify-center rounded-full border border-stone-200 text-stone-500 hover:bg-[#AA1C1C] hover:text-white hover:border-[#AA1C1C] transition-colors"><iconify-icon
+                icon="lucide:chevron-right" width="18"></iconify-icon></a>
+            {% endif %}
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
