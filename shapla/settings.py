@@ -12,9 +12,11 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.urls import reverse_lazy
 
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qsl
+from django.urls import reverse_lazy, reverse
 
 # Load environment variables from .env file
 load_dotenv()
@@ -38,6 +40,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +52,7 @@ INSTALLED_APPS = [
     'blog',
     "tailwind",
     "theme",
+    'django_ckeditor_5',
     
 ]
 
@@ -153,3 +157,153 @@ STATIC_URL = 'static/'
 
 # Tailwind theme app config
 TAILWIND_APP_NAME = 'theme'
+
+# Media Files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Unfold Admin Theme
+UNFOLD = {
+    "SITE_TITLE": "Shapla Admin",
+    "SITE_HEADER": "Shapla Dashboard",
+    "SITE_URL": "/",
+    "DASHBOARD_CALLBACK": "blog.views.dashboard_callback",
+    "COLORS": {
+        "primary": {
+            "50": "254 242 242",
+            "100": "254 226 226",
+            "200": "254 202 202",
+            "300": "252 165 165",
+            "400": "248 113 113",
+            "500": "239 68 68",
+            "600": "170 28 28",  # #AA1C1C
+            "700": "153 27 27",
+            "800": "127 29 29",
+            "900": "69 10 10",
+            "950": "35 5 5",
+        },
+    },
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+        "navigation": [
+            {
+                "title": "Content Management",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Dashboard",
+                        "icon": "dashboard",
+                        "link": reverse_lazy("admin:index"),
+                    },
+                    {
+                        "title": "Posts",
+                        "icon": "article",
+                        "link": reverse_lazy("admin:blog_post_changelist"),
+                    },
+                    {
+                        "title": "Categories",
+                        "icon": "category",
+                        "link": reverse_lazy("admin:blog_category_changelist"),
+                    },
+                    {
+                        "title": "Authors",
+                        "icon": "person_edit",
+                        "link": reverse_lazy("admin:blog_author_changelist"),
+                    },
+                    {
+                        "title": "Team Members",
+                        "icon": "groups",
+                        "link": reverse_lazy("admin:blog_teammember_changelist"),
+                    },
+                ],
+            },
+               {
+                "title": "System",
+                "separator": True,
+                "items": [
+                     {
+                        "title": "Users & Groups",
+                        "icon": "people",
+                        "link": reverse_lazy("admin:app_list", args=("auth",)),
+                    },
+                ]
+            }
+        ],
+    },
+}
+
+
+# CKEditor 5 Configuration
+# CKEDITOR_5_CUSTOM_CSS = '/static/css/dist/styles.css' # Commented out to prevent conflict with Admin UI
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': ['heading', '|', 'bold', 'italic', 'link',
+                    'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+
+    },
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
+        ],
+        'toolbar': {
+            'items': [
+                'heading', '|', 
+                'bold', 'italic', 'underline', 'strikethrough', 'code', '|',
+                'bulletedList', 'numberedList', 'todoList', '|',
+                'outdent', 'indent', '|',
+                'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'horizontalLine', '|', 
+                'removeFormat', 'sourceEditing'
+            ],
+            'shouldNotGroupWhenFull': False
+        },
+        'image': {
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
+            'styles': [
+                'full',
+                'side',
+                'alignLeft',
+                'alignRight',
+                'alignCenter',
+            ]
+
+        },
+        'table': {
+            'contentToolbar': [ 'tableColumn', 'tableRow', 'mergeTableCells',
+            'tableProperties', 'tableCellProperties' ],
+            'tableProperties': {
+                'borderColors': 'custom',
+                'backgroundColors': 'custom'
+            },
+            'tableCellProperties': {
+                'borderColors': 'custom',
+                'backgroundColors': 'custom'
+            }
+        },
+        'heading': {
+            'options': [
+                { 'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph' },
+                { 'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1' },
+                { 'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2' },
+                { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
+            ]
+        },
+        'htmlSupport': {
+            'allow': [
+                {'name': '/.*/', 'attributes': True, 'classes': True, 'styles': True}
+            ]
+        }
+    },
+    'list': {
+        'properties': {
+            'styles': 'true',
+            'startIndex': 'true',
+            'reversed': 'true',
+        }
+    }
+}

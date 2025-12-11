@@ -6,22 +6,25 @@
     <section id="view-post" class="page-transition">
         <div class="max-w-[900px] mx-auto">
             <div class="flex items-center gap-2 text-xs text-stone/50 mb-8 font-serif">
-                <span class="hover:text-ink cursor-pointer" onclick="router('home')">Home</span>
+                <a href="{% url 'index' %}" class="hover:text-ink cursor-pointer">Home</a>
                 <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
-                <span class="hover:text-ink cursor-pointer" onclick="router('category')">Essays</span>
+                <a href="{% url 'category' post.category.slug %}" class="hover:text-ink cursor-pointer">{{ post.category.name }}</a>
             </div>
 
             <h1 class="text-3xl md:text-5xl font-bold text-ink leading-[1.2] mb-6 tracking-tight">
-                হারিয়ে যাওয়া শব্দের খোঁজে: বাংলা সাহিত্যের আধুনিক বাঁক
+                {{ post.title }}
             </h1>
 
             <div class="flex items-center justify-between border-y border-ink/10 py-4 mb-8">
                 <div class="flex items-center gap-3">
-                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Felix"
-                        class="w-10 h-10 rounded-full border border-stone-200 bg-white" alt="Author">
+                    {% if post.author.author_image %}
+                    <img src="{{ post.author.author_image.url }}" class="w-10 h-10 rounded-full border border-stone-200 bg-white" alt="{{ post.author.name }}">
+                    {% else %}
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed={{ post.author.name }}" class="w-10 h-10 rounded-full border border-stone-200 bg-white" alt="Author">
+                    {% endif %}
                     <div class="flex flex-col">
-                        <span class="text-sm font-bold text-charcoal">সুনীল গঙ্গোপাধ্যায়</span>
-                        <span class="text-xs text-stone/60">সাহিত্যিক ও প্রাবন্ধিক</span>
+                        <span class="text-sm font-bold text-charcoal">{{ post.author.name }}</span>
+                        <span class="text-xs text-stone/60">{{ post.created_at|date:"j F Y" }}</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-4 text-stone/50">
@@ -32,37 +35,8 @@
                 </div>
             </div>
 
-            <article class="prose-bengali text-lg md:text-xl text-charcoal/90">
-                <p
-                    class="mb-6 first-letter:text-5xl first-letter:font-serif first-letter:text-ink first-letter:float-left first-letter:mr-3 first-letter:-mt-1.5">
-                    সাহিত্যের ইতিহাস এক অদ্ভুত পথচলা। কখনো সে রাজপথ দিয়ে হাটে, কখনো বা সরু গলি দিয়ে। বাংলা সাহিত্যের
-                    ক্ষেত্রেও এর ব্যতিক্রম ঘটেনি। উনিশ শতকের নবজাগরণ থেকে শুরু করে আজকের ফেইসবুক স্ট্যাটাস—সবর্ত্রই
-                    শব্দের এক মায়াবী খেলা।
-                </p>
-                <p class="mb-6">
-                    আধুনিক কবিতার দিকে তাকালে দেখা যায়, ছন্দের বাধন আলগা হয়েছে অনেক আগেই। এখন ভাবটাই মুখ্য। কিন্তু এই
-                    ভাব প্রকাশের মাধ্যম হিসেবে যে ভাষা ব্যবহৃত হচ্ছে, তা অনেক ক্ষেত্রেই সংকর। <span
-                        class="bg-ink/5 px-1 rounded text-ink font-medium">ইংরেজি ও বাংলার মিশেলে</span> তৈরি হচ্ছে এক
-                    নতুন উপভাষা।
-                </p>
-                <h2 class="text-2xl font-bold text-ink mt-10 mb-4 tracking-tight">প্রযুক্তির প্রভাব ও সাহিত্য</h2>
-                <p class="mb-6">
-                    বই পড়ার অভ্যাস কমেছে, এ কথা অস্বীকার করার উপায় নেই। কিন্তু পড়ার মাধ্যম বদলেছে। এখন মানুষ স্ক্রল করে
-                    পড়ে। তাই লেখকদের চ্যালেঞ্জ এখন দ্বিগুণ। স্বল্প সময়ে পাঠকের মন জয় করতে হবে।
-                </p>
-                <blockquote
-                    class="border-l-4 border-gold pl-6 py-2 my-8 italic text-2xl text-stone/80 font-serif bg-white/50 rounded-r-lg">
-                    "শব্দ যখন নীরব হয়, তখন অনুভূতির জন্ম হয়। কিন্তু ডিজিটাল কোলাহলে সেই নীরবতা আজ বড়ই দুর্লভ।"
-                </blockquote>
-                <p class="mb-6">
-                    তবুও আশার কথা হলো, লিটল ম্যাগাজিন আন্দোলন এখনো থেমে নেই। কলেজ স্ট্রিটের মোড়ে এখনো তরুণ লেখকরা আড্ডা
-                    দেয়, চায়ের কাপে ঝড় তোলে। তাদের চোখে এখনো স্বপ্ন—বাংলা সাহিত্যকে বিশ্বদরবারে নতুন করে পরিচয় করিয়ে
-                    দেওয়ার।
-                </p>
-                <p class="mb-12">
-                    আমাদের দায়িত্ব এই ধুকপুকানিটাকে জিইয়ে রাখা। শুদ্ধ বাংলার চর্চা, ধ্রুপদী সাহিত্যের পাঠ এবং নতুনকে বরণ
-                    করে নেওয়া—এই তিনে মিলেই গড়ে উঠবে আগামীর বাংলা সাহিত্য।
-                </p>
+            <article class="prose prose-lg md:prose-xl max-w-none prose-bengali text-charcoal/90">
+                {{ post.post_text|safe }}
             </article>
 
             <!-- Tags -->
@@ -79,18 +53,16 @@
             <div class="bg-stone-50 rounded-xl p-6 md:p-8 mb-12">
                 <h3 class="text-sm font-bold text-stone/40 uppercase tracking-widest mb-6">Read Next</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="group cursor-pointer">
+                    {% for rpost in related_posts %}
+                    <div class="group cursor-pointer" onclick="window.location.href='{% url 'post' rpost.slug %}'">
                         <h4 class="text-lg font-bold text-charcoal group-hover:text-ink transition-colors mb-2">
-                            পোস্টমডার্ন সাহিত্য ও আমাদের অবস্থান</h4>
-                        <p class="text-xs text-stone/60 line-clamp-2">পাশ্চাত্যের হাওয়া যখন পূর্বে এসে লাগে, তখন তার রূপ
-                            কেমন হয়?</p>
+                            {{ rpost.title }}</h4>
+                        <!-- Description truncated if needed, or just date/author -->
+                         <div class="text-xs text-stone/60 line-clamp-2">{{ rpost.created_at|timesince }} আগে</div>
                     </div>
-                    <div class="group cursor-pointer">
-                        <h4 class="text-lg font-bold text-charcoal group-hover:text-ink transition-colors mb-2">কবিতার
-                            ছন্দ প্রকরণ</h4>
-                        <p class="text-xs text-stone/60 line-clamp-2">মাত্রাবৃত্ত না কি অক্ষরবৃত্ত? নবীন কবিদের জন্য
-                            একটি নির্দেশিকা।</p>
-                    </div>
+                    {% empty %}
+                     <p class="text-stone-400 text-sm">আর কোনো লেখা পাওয়া যায়নি।</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>

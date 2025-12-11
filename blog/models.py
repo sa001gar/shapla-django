@@ -2,6 +2,7 @@ from django.db import models
 from PIL import Image
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django_ckeditor_5.fields import CKEditor5Field
 import sys
 
 # Create your models here.
@@ -120,7 +121,7 @@ class Post(models.Model):
     
     post_image = models.ImageField(upload_to='post_images', blank=True, null=True)
     post_image_alt = models.CharField(max_length=100, blank=True)
-    post_text = models.TextField()
+    post_text = CKEditor5Field('Text', config_name='extends')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Post, Category, TeamMember
+from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def index(request):
@@ -31,9 +33,51 @@ def index(request):
 def authors(request):
     return render(request, 'pages/authors.html')
 
-def category(request):
-    return render(request, 'pages/categories.html')
+def category(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    posts_list = Post.objects.filter(category=category)
+    
+    paginator = Paginator(posts_list, 6) # Show 6 posts per page
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+        
+    context = {
+        'category': category,
+        'posts': posts
+    }
+    return render(request, 'pages/categories.html', context)
 
-def post(request):
-    return render(request, 'pages/post-individual.html')
+def post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    related_posts = Post.objects.filter(category=post.category).exclude(id=post.id)[:2]
+    context = {
+        'post': post,
+        'related_posts': related_posts
+    }
+    return render(request, 'pages/post-individual.html', context)
 
+def dashboard_callback(request, context):
+    from .models import Post, Category, Author # Import needed within function to avoid circular imports
+    context.update({
+        "kpi": [
+            {
+                "title": "Total Posts",
+                "metric": Post.objects.count(),
+                "footer": "All time",
+            },
+            {
+                 "title": "Categories",
+                 "metric": Category.objects.count(),
+            },
+               {
+                 "title": "Authors",
+                 "metric": Author.objects.count(),
+            },
+        ],
+    })
+    return context

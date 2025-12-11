@@ -246,6 +246,9 @@
   .pointer-events-none {
     pointer-events: none;
   }
+  .collapse {
+    visibility: collapse;
+  }
   .absolute {
     position: absolute;
   }
@@ -519,6 +522,9 @@
   .w-\[150\%\] {
     width: 150%;
   }
+  .w-auto {
+    width: auto;
+  }
   .w-full {
     width: 100%;
   }
@@ -539,6 +545,9 @@
   }
   .max-w-lg {
     max-width: var(--container-lg);
+  }
+  .max-w-none {
+    max-width: none;
   }
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
@@ -962,6 +971,9 @@
   }
   .bg-size-\[16px_16px\] {
     background-size: 16px 16px;
+  }
+  .object-contain {
+    object-fit: contain;
   }
   .object-cover {
     object-fit: cover;

@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Top Bar -->
 <div class="bg-stone-100 text-stone-500 text-xs py-2 border-b border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
@@ -8,7 +9,7 @@
              // For now static or server side is better, but this matches the user request visual
             const date = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            // document.getElementById('current-date-header').textContent = date.toLocaleDateString('bn-BD', options);
+              document.getElementById('current-date-header').textContent = date.toLocaleDateString('bn-BD', options);
         </script>
         
         <!-- Social Icons -->
@@ -30,9 +31,7 @@
                       Since I don't have the exact image asset, I will recreate the look with text/icon 
                       or use a placeholder if the original code had one. 
                       The image shows green stylized text "শাপলা" with a flower. -->
-                <span class="font-bengali font-bold text-5xl text-[#4A7C59] flex items-center gap-2">
-                    শাপলা <iconify-icon icon="lucide:flower-2" class="text-pink-500 text-4xl -mt-2"></iconify-icon>
-                </span>
+                <img src="{% static 'assets/logo.png' %}" alt="Shapla Logo" class="h-16 w-auto object-contain">
              </div>
             <span class="text-stone-500 font-bengali text-sm tracking-widest">সাহিত্যের শাপলা বিল</span>
         </a>
@@ -46,7 +45,7 @@
             <ul class="flex items-center gap-8 font-bengali font-semibold text-sm py-3.5">
                 <li><a href="{% url 'index' %}" class="hover:text-stone-200 transition-colors">প্রচ্ছদ</a></li>
                 {% for category in all_categories %}
-                <li><a href="{% url 'category' %}" class="hover:text-stone-200 transition-colors">{{ category.name }}</a></li>
+                <li><a href="{% url 'category' category.slug %}" class="hover:text-stone-200 transition-colors">{{ category.name }}</a></li>
                 {% endfor %}
                  <!-- Search Icon on right side of nav inside container if needed, or keeping it clean as per image -->
             </ul>
@@ -69,7 +68,7 @@
         <button onclick="window.location.href='{% url 'index' %}'; toggleMobileMenu()"
             class="text-left hover:text-[#AA1C1C] transition-colors">প্রচ্ছদ</button>
         {% for category in all_categories %}
-        <button onclick="window.location.href='{% url 'category' %}'; toggleMobileMenu()" class="text-left hover:text-[#AA1C1C] transition-colors">{{ category.name }}</button>
+        <button onclick="window.location.href='{% url 'category' category.slug %}'; toggleMobileMenu()" class="text-left hover:text-[#AA1C1C] transition-colors">{{ category.name }}</button>
         {% endfor %}
     </nav>
 

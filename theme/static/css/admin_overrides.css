@@ -1,0 +1,19 @@
+/* Fix CKEditor 5 overflow in Admin Panel */
+.ck.ck-editor__main > .ck-editor__editable {
+    max-width: 100% !important;
+    min-height: 400px;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Force toolbar to wrap */
+.ck.ck-toolbar {
+    flex-wrap: wrap !important;
+}
+
+/* Container constraints */
+.django-ckeditor-5-widget {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+}

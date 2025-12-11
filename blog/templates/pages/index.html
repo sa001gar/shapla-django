@@ -10,7 +10,7 @@
             <div class="lg:col-span-7 space-y-6 pt-4">
                 <span class="inline-block px-2 py-1 bg-ink/5 text-ink text-xs font-semibold rounded tracking-wide border border-ink/10">সম্পাদকীয়</span>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-ink leading-[1.1] tracking-tight cursor-pointer hover:opacity-90 transition-opacity"
-                    onclick="window.location.href='{% url 'post' %}'">{{ hero_post.title }}</h1>
+                    onclick="window.location.href='{% url 'post' hero_post.slug %}'">{{ hero_post.title }}</h1>
                 <p class="text-lg text-charcoal/80 leading-relaxed font-light max-w-2xl">
                     {{ hero_post.description|default:"" }}
                 </p>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="lg:col-span-5 relative group cursor-pointer"
-                 onclick="window.location.href='{% url 'post' %}'">
+                 onclick="window.location.href='{% url 'post' hero_post.slug %}'">
                 <div class="aspect-4/3 bg-stone-200 rounded-lg overflow-hidden border border-ink/5 relative shadow-sm hover:shadow-md transition-all duration-500">
                     {% if hero_post.post_image %}
                     <img src="{{ hero_post.post_image.url }}" alt="{{ hero_post.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
@@ -52,7 +52,7 @@
             <!-- Header -->
             <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
                 <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">রাজনীতি</div>
-                <button onclick="router('category')" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
+                <button onclick="window.location.href='{% url 'category' 'politics' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
                     আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
                 </button>
             </div>
@@ -60,7 +60,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                  {% for post in politics_posts %}
                  <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' %}'">
+                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.slug %}'">
                     <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
                         {% if post.post_image %}
                         <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
@@ -86,7 +86,7 @@
             <!-- Header -->
             <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
                 <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">খেলা</div>
-                <button onclick="router('category')" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
+                <button onclick="window.location.href='{% url 'category' 'sports' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
                     আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
                 </button>
             </div>
@@ -94,7 +94,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                  {% for post in sports_posts %}
                  <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' %}'">
+                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.slug %}'">
                     <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
                         {% if post.post_image %}
                         <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
@@ -120,7 +120,7 @@
             <!-- Header -->
             <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
                 <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">ফিচার</div>
-                <button onclick="router('category')" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
+                <button onclick="window.location.href='{% url 'category' 'featured' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
                     আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
                 </button>
             </div>
@@ -128,7 +128,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                  {% for post in feature_posts %}
                  <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' %}'">
+                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.slug %}'">
                     <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
                         {% if post.post_image %}
                         <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
@@ -154,7 +154,7 @@
             <!-- Header -->
             <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
                 <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">মতামত</div>
-                <button onclick="router('category')" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
+                <button onclick="window.location.href='{% url 'category' 'opinion' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
                     আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
                 </button>
             </div>
@@ -162,7 +162,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                  {% for post in opinion_posts %}
                  <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' %}'">
+                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.slug %}'">
                     <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
                         {% if post.post_image %}
                         <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
@@ -188,7 +188,7 @@
             <!-- Header -->
             <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
                 <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">বিনোদন</div>
-                <button onclick="router('category')" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
+                <button onclick="window.location.href='{% url 'category' 'entertainment' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
                     আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
                 </button>
             </div>
@@ -196,7 +196,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                  {% for post in entertainment_posts %}
                  <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' %}'">
+                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.slug %}'">
                     <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
                         {% if post.post_image %}
                         <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
@@ -222,7 +222,7 @@
             <!-- Header -->
             <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
                 <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">আন্তর্জাতিক</div>
-                <button onclick="router('category')" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
+                <button onclick="window.location.href='{% url 'category' 'international' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
                     আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
                 </button>
             </div>
@@ -230,7 +230,7 @@
              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                  {% for post in international_posts %}
                  <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' %}'">
+                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.slug %}'">
                     <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
                         {% if post.post_image %}
                         <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
