@@ -1,26 +1,24 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <title>Shapla | Where Literature Meets Life</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<head>
-    <title>Shapla | Where Literature Meets Life</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap"
+              rel="stylesheet">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap"
-        rel="stylesheet">
+        <!-- Tailwind CSS -->
+        {% tailwind_css %}
 
-    <!-- Tailwind CSS -->
-    {% tailwind_css %}
-
-    <!-- Iconify -->
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <style>
+        <!-- Iconify -->
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+        <style>
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -111,37 +109,28 @@
         .menu-visible {
             transform: translateX(0);
         }
-    </style>
-</head>
-
-<body
-    class="bg-cream text-stone font-bengali antialiased min-h-screen flex flex-col selection:bg-ink selection:text-white">
-
-    {% include 'layout/header.html' %}
-    {% block content %}
-    {% endblock %}
-    {% include 'layout/footer.html' %}
-
-    <script>
-        const views = {
-            home: document.getElementById('view-home'),
-            post: document.getElementById('view-post'),
-            admin: document.getElementById('view-admin'),
-            authors: document.getElementById('view-authors'),
-            category: document.getElementById('view-category')
-        };
-        
+        </style>
+    </head>
+    <body class="bg-cream text-stone font-bengali antialiased min-h-screen flex flex-col selection:bg-ink selection:text-white">
+        {% include "layout/header.html" %}
+        <!-- Main Content Area -->
+        <main id="main-container"
+              class="flex grow w-full max-w-7xl mx-auto px-4 sm:px-6 py-8">
+            {% block content %}{% endblock %}
+        </main>
+        {% include "layout/footer.html" %}
+        <script>
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
         let isMenuOpen = false;
 
-        function router(route) {
+        {% comment %} function router(route) {
             Object.values(views).forEach(el => el.classList.add('hidden-section'));
             if (views[route]) {
                 views[route].classList.remove('hidden-section');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-        }
+        } {% endcomment %}
 
         function toggleMobileMenu() {
             isMenuOpen = !isMenuOpen;
@@ -158,26 +147,8 @@
             }
         }
 
-        function switchRole(role) {
-            const btnReader = document.getElementById('btn-reader');
-            const btnAdmin = document.getElementById('btn-admin');
-            
-            if (role === 'admin') {
-                btnReader.className = "px-3 py-1 rounded-full text-xs font-semibold text-charcoal hover:bg-stone-200/50 transition-all";
-                btnAdmin.className = "px-3 py-1 rounded-full text-xs font-semibold bg-ink text-white shadow-sm transition-all";
-                router('admin');
-            } else {
-                btnAdmin.className = "px-3 py-1 rounded-full text-xs font-semibold text-charcoal hover:bg-stone-200/50 transition-all";
-                btnReader.className = "px-3 py-1 rounded-full text-xs font-semibold bg-ink text-white shadow-sm transition-all";
-                router('home');
-            }
-        }
-
-        router('home');
-    </script>
-
-    {% block extra_js %}
-    {% endblock %}
-</body>
-
+        
+        </script>
+        {% block extra_js %}{% endblock %}
+    </body>
 </html>

@@ -1,27 +1,70 @@
 <!-- Footer -->
-    <footer class="border-t border-ink/10 bg-paper py-12 mt-auto">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="md:col-span-2">
-                <div class="flex items-center gap-2 mb-4">
-                    <div class="w-6 h-6 bg-ink rounded text-cream flex items-center justify-center font-serif font-bold text-xs italic">P</div>
-                    <span class="font-bengali font-bold text-ink text-lg">পত্রিকা</span>
+<footer class="bg-black text-white/80 font-bengali pt-16 pb-8 border-t-4 border-[#AA1C1C]">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <!-- Column 1: About -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-2 mb-2">
+                     <span class="font-bengali font-bold text-3xl text-white">শাপলা</span>
                 </div>
-                <p class="text-stone/60 text-sm leading-relaxed max-w-xs font-serif">Bridging tradition and modern reading experiences.</p>
+                <p class="text-white/60 text-sm leading-relaxed">
+                    শাপলা - বাংলা সাহিত্য ও সংস্কৃতির এক অনন্য প্ল্যাটফর্ম। আমরা বিশ্বাস করি নতুনের আবাহনে ও পুরনোর ঐতিহ্যে। আমাদের সাথে থাকুন, লিখুন এবং পড়ুন।
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#AA1C1C] transition-colors text-white"><iconify-icon icon="lucide:facebook" width="20"></iconify-icon></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#AA1C1C] transition-colors text-white"><iconify-icon icon="lucide:twitter" width="20"></iconify-icon></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#AA1C1C] transition-colors text-white"><iconify-icon icon="lucide:instagram" width="20"></iconify-icon></a>
+                     <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#AA1C1C] transition-colors text-white"><iconify-icon icon="lucide:youtube" width="20"></iconify-icon></a>
+                </div>
             </div>
+
+            <!-- Column 2: Categories -->
             <div>
-                <h4 class="font-serif font-semibold text-charcoal text-sm mb-4">Navigation</h4>
-                <ul class="space-y-2 text-sm text-stone/60">
-                    <li><button onclick="router('home')" class="hover:text-ink">Home</button></li>
-                    <li><button onclick="router('authors')" class="hover:text-ink">Authors</button></li>
-                    <li><button onclick="router('category')" class="hover:text-ink">Archive</button></li>
+                <h4 class="text-white font-bold text-lg mb-6 border-b border-white/10 pb-2 inline-block">বিভাগসমূহ</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="{% url 'category' %}" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">জাতীয় সংবাদ</a></li>
+                    <li><a href="{% url 'category' %}" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">রাজনীতি</a></li>
+                    <li><a href="{% url 'category' %}" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">খেলাধুলা</a></li>
+                    <li><a href="{% url 'category' %}" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">বিনোদন</a></li>
+                    <li><a href="{% url 'category' %}" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">প্রযুক্তি ও গ্যাজেট</a></li>
+                    <li><a href="{% url 'category' %}" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">লাইফস্টাইল</a></li>
                 </ul>
             </div>
+
+            <!-- Column 3: Quick Links -->
             <div>
-                <h4 class="font-serif font-semibold text-charcoal text-sm mb-4">Connect</h4>
-                <div class="flex gap-4 text-stone/40">
-                    <a href="#" class="hover:text-ink"><iconify-icon icon="lucide:facebook" width="20"></iconify-icon></a>
-                    <a href="#" class="hover:text-ink"><iconify-icon icon="lucide:twitter" width="20"></iconify-icon></a>
-                </div>
+                 <h4 class="text-white font-bold text-lg mb-6 border-b border-white/10 pb-2 inline-block">গুরুত্বপূর্ণ লিংক</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">আমাদের সম্পর্কে</a></li>
+                    <li><a href="#" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">যোগাযোগ</a></li>
+                    <li><a href="#" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">গোপনীয়তা নীতি</a></li>
+                    <li><a href="#" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">শর্তাবলী</a></li>
+                    <li><a href="#" class="hover:text-[#AA1C1C] transition-colors hover:pl-2 duration-300 block">বিজ্ঞাপন দিন</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Newsletter -->
+            <div>
+                <h4 class="text-white font-bold text-lg mb-6 border-b border-white/10 pb-2 inline-block">নিউজলেটার</h4>
+                <p class="text-white/60 text-sm mb-4 leading-relaxed">
+                    সবার আগে সর্বশেষ সংবাদ পেতে আমাদের নিউজলেটারে সাবস্ক্রাইব করুন।
+                </p>
+                <form class="space-y-3">
+                    <input type="email" placeholder="আপনার ইমেইল" class="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white text-sm focus:outline-none focus:border-[#AA1C1C] transition-colors">
+                    <button class="w-full bg-[#AA1C1C] text-white font-bold py-3 rounded hover:bg-red-700 transition-colors text-sm uppercase tracking-wide">
+                        সাবস্ক্রাইব
+                    </button>
+                </form>
             </div>
         </div>
-    </footer>
+
+        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-white/40 text-xs text-center md:text-left">
+                &copy; ২০২৫ শাপলা পত্রিকা | সর্বস্বত্ব সংরক্ষিত
+            </p>
+            <div class="flex items-center gap-6 text-xs text-white/40">
+                <span>Design & Developed by Antigravity</span>
+            </div>
+        </div>
+    </div>
+</footer>

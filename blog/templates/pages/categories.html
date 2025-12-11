@@ -1,0 +1,202 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<!-- ================= VIEW: CATEGORY / ARCHIVE ================= -->
+    <section id="view-category" class="page-transition">
+        <div class="flex flex-col md:flex-row gap-12 items-start">
+
+            <!-- Filters Sidebar -->
+            <aside class="w-full md:w-64 shrink-0 space-y-8 sticky top-24">
+                <div>
+                    <h3 class="text-xs font-bold text-stone/40 uppercase tracking-widest mb-4">Categories</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="cat-poem" class="custom-checkbox peer" checked="">
+                            <label for="cat-poem"
+                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">কবিতা
+                                (Poetry)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="cat-story" class="custom-checkbox peer" checked="">
+                            <label for="cat-story"
+                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">গল্প
+                                (Stories)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="cat-essay" class="custom-checkbox peer">
+                            <label for="cat-essay"
+                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">প্রবন্ধ
+                                (Essays)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="cat-novel" class="custom-checkbox peer">
+                            <label for="cat-novel"
+                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">উপন্যাস
+                                (Novels)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xs font-bold text-stone/40 uppercase tracking-widest mb-4">Time Period</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="year-2024" class="custom-checkbox peer" checked="">
+                            <label for="year-2024"
+                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">2024</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="year-2023" class="custom-checkbox peer">
+                            <label for="year-2023"
+                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">2023</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="year-old" class="custom-checkbox peer">
+                            <label for="year-old"
+                                class="text-sm text-stone-600 font-medium hover:text-ink transition-colors">Archived</label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- List Content -->
+            <div class="grow w-full">
+                <div class="mb-6 flex items-baseline justify-between border-b border-ink/10 pb-4">
+                    <h1 class="text-3xl font-bold text-ink tracking-tight">গল্প ও কবিতা সংকলন</h1>
+                    <span class="text-xs font-serif text-stone/50 italic">Showing 10+ results</span>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- List Item 1 -->
+                    <article
+                        class="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start p-4 -mx-4 rounded-xl hover:bg-white/60 hover:shadow-sm transition-all cursor-pointer"
+                        onclick="router('post')">
+                        <div class="w-full sm:w-48 aspect-3/2 bg-stone-200 rounded-lg overflow-hidden shrink-0">
+                            <div
+                                class="w-full h-full bg-linear-to-br from-stone-100 to-stone-50 flex items-center justify-center">
+                                <iconify-icon icon="lucide:book-open" class="text-stone/20" width="32"></iconify-icon>
+                            </div>
+                        </div>
+                        <div class="grow">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span
+                                    class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-blue-50 text-blue-600">Story</span>
+                                <span class="text-xs text-stone/40 font-serif">Oct 12, 2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal group-hover:text-ink transition-colors mb-2">
+                                অপেক্ষার প্রহর ও একটি নীল খাম</h3>
+                            <p class="text-sm text-stone/60 line-clamp-2 mb-3">বহুবছর পর পিয়ন এসে কড়া নাড়ল দরজায়। হাতে
+                                সেই পরিচিত নীল খাম, যার অপেক্ষায় কেটে গেছে দীর্ঘ দুটি যুগ।</p>
+                            <div class="flex items-center gap-2 text-xs font-medium text-stone/50">
+                                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Felix"
+                                    class="w-5 h-5 rounded-full" alt="avatar">
+                                <span>সুনীল গঙ্গোপাধ্যায়</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- List Item 2 -->
+                    <article
+                        class="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start p-4 -mx-4 rounded-xl hover:bg-white/60 hover:shadow-sm transition-all cursor-pointer"
+                        onclick="router('post')">
+                        <div class="w-full sm:w-48 aspect-3/2 bg-stone-200 rounded-lg overflow-hidden shrink-0">
+                            <div
+                                class="w-full h-full bg-linear-to-br from-paper to-white flex items-center justify-center">
+                                <iconify-icon icon="lucide:feather" class="text-stone/20" width="32"></iconify-icon>
+                            </div>
+                        </div>
+                        <div class="grow">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span
+                                    class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-amber-50 text-amber-600">Poetry</span>
+                                <span class="text-xs text-stone/40 font-serif">Sep 28, 2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal group-hover:text-ink transition-colors mb-2">
+                                শহরের শেষ বিকেলের রোদ</h3>
+                            <p class="text-sm text-stone/60 line-clamp-2 mb-3">শহরের বুকে যখন সন্ধ্যা নামে, তখন
+                                ট্রামলাইনের পাশে দাঁড়িয়ে থাকা পুরনো গাছটা ফিসফিস করে কথা বলে।</p>
+                            <div class="flex items-center gap-2 text-xs font-medium text-stone/50">
+                                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Aneka"
+                                    class="w-5 h-5 rounded-full" alt="avatar">
+                                <span>তসলিমা নাসরিন</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- List Item 3 -->
+                    <article
+                        class="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start p-4 -mx-4 rounded-xl hover:bg-white/60 hover:shadow-sm transition-all cursor-pointer"
+                        onclick="router('post')">
+                        <div class="w-full sm:w-48 aspect-3/2 bg-stone-200 rounded-lg overflow-hidden shrink-0">
+                            <div
+                                class="w-full h-full bg-linear-to-br from-stone-50 to-stone-100 flex items-center justify-center">
+                                <iconify-icon icon="lucide:file-text" class="text-stone/20" width="32"></iconify-icon>
+                            </div>
+                        </div>
+                        <div class="grow">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span
+                                    class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-emerald-50 text-emerald-600">Essay</span>
+                                <span class="text-xs text-stone/40 font-serif">Sep 10, 2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal group-hover:text-ink transition-colors mb-2">
+                                বাংলা ভাষা ও তার বিবর্তন</h3>
+                            <p class="text-sm text-stone/60 line-clamp-2 mb-3">চর্যাপদ থেকে আজকের ফেসবুক স্ট্যাটাস—বাংলা
+                                ভাষার এই দীর্ঘ পথচলার বাঁকে বাঁকে লুকিয়ে আছে ইতিহাসের মণিমুক্তো।</p>
+                            <div class="flex items-center gap-2 text-xs font-medium text-stone/50">
+                                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ryan"
+                                    class="w-5 h-5 rounded-full" alt="avatar">
+                                <span>হুমায়ূন আহমেদ</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- List Item 4 -->
+                    <article
+                        class="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start p-4 -mx-4 rounded-xl hover:bg-white/60 hover:shadow-sm transition-all cursor-pointer"
+                        onclick="router('post')">
+                        <div class="w-full sm:w-48 aspect-3/2 bg-stone-200 rounded-lg overflow-hidden shrink-0">
+                            <div
+                                class="w-full h-full bg-linear-to-br from-stone-100 to-white flex items-center justify-center">
+                                <iconify-icon icon="lucide:cloud-sun" class="text-stone/20" width="32"></iconify-icon>
+                            </div>
+                        </div>
+                        <div class="grow">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span
+                                    class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-purple-50 text-purple-600">Travel</span>
+                                <span class="text-xs text-stone/40 font-serif">Aug 15, 2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal group-hover:text-ink transition-colors mb-2">পথের
+                                পাঁচালী: এক নতুন যাত্রা</h3>
+                            <p class="text-sm text-stone/60 line-clamp-2 mb-3">গ্রামের সেই মেঠো পথ ধরে হাঁটতে হাঁটতে
+                                হঠাৎ মনে হলো, জীবন তো আসলে এই পথেরই মতো। কোথাও আঁকাবাঁকা, কোথাও সোজা।</p>
+                            <div class="flex items-center gap-2 text-xs font-medium text-stone/50">
+                                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Bibhuti"
+                                    class="w-5 h-5 rounded-full" alt="avatar">
+                                <span>বিভূতিভূষণ</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center gap-2 mt-12">
+                    <button
+                        class="w-8 h-8 flex items-center justify-center rounded border border-ink/10 text-stone-500 hover:bg-white hover:text-ink transition-colors disabled:opacity-50"><iconify-icon
+                            icon="lucide:chevron-left" width="16"></iconify-icon></button>
+                    <button
+                        class="w-8 h-8 flex items-center justify-center rounded bg-ink text-white font-serif text-sm">1</button>
+                    <button
+                        class="w-8 h-8 flex items-center justify-center rounded border border-ink/10 text-stone-500 hover:bg-white hover:text-ink transition-colors font-serif text-sm">2</button>
+                    <button
+                        class="w-8 h-8 flex items-center justify-center rounded border border-ink/10 text-stone-500 hover:bg-white hover:text-ink transition-colors font-serif text-sm">3</button>
+                    <button
+                        class="w-8 h-8 flex items-center justify-center rounded border border-ink/10 text-stone-500 hover:bg-white hover:text-ink transition-colors"><iconify-icon
+                            icon="lucide:chevron-right" width="16"></iconify-icon></button>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
