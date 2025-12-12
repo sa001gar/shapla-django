@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.cache import cache_page
 
 # Create your views here.
-# @cache_page(60 * 15) # Cache for 15 minutes
+@cache_page(60 * 15) # Cache for 15 minutes
 def index(request):
     # Fetch Hero Post (Latest "Editorial" or just latest post)
     # Assuming 'editorial' slug for hero or just first post for now. 
@@ -15,19 +15,19 @@ def index(request):
     if not hero_post:
         hero_post = Post.objects.order_by('-created_at').select_related('author', 'category').first()
 
-    # Helper to fetch posts by category slug
-    def get_category_posts(slug):
-        return Post.objects.filter(category__slug=slug).select_related('author', 'category')[:4]
+    # Fetch all categories and their latest posts
+    categories = Category.objects.all()
+    category_sections = []
+    for category in categories:
+        posts = Post.objects.filter(category=category).select_related('author', 'category')[:4]
+        category_sections.append({
+            'category': category,
+            'posts': posts
+        })
 
     context = {
         'hero_post': hero_post,
-        'politics_posts': get_category_posts('politics'),
-        'sports_posts': get_category_posts('sports'),
-        'feature_posts': get_category_posts('featured'),
-        'opinion_posts': get_category_posts('opinion'),
-        'international_posts': get_category_posts('international'),
-        'entertainment_posts': get_category_posts('entertainment'),
-        'education_posts': get_category_posts('education'),
+        'category_sections': category_sections,
         'team_members': TeamMember.objects.all()[:4],
     }
     
@@ -36,6 +36,7 @@ def index(request):
 def authors(request):
     return render(request, 'pages/authors.html')
 
+@cache_page(60 * 15) # Cache for 15 minutes
 def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     posts_list = Post.objects.filter(category=category).select_related('author', 'category')
@@ -54,7 +55,8 @@ def category(request, slug):
         'posts': posts
     }
     return render(request, 'pages/categories.html', context)
-
+    
+@cache_page(60 * 15) # Cache for 15 minutes
 def post(request, category_slug, post_slug):
     # Use select_related to fetch connected Author and Category in one go
     post = get_object_or_404(Post.objects.select_related('author', 'category'), slug=post_slug, category__slug=category_slug)

@@ -48,18 +48,19 @@
 
         <!-- ================= CATEGORY SECTIONS (4 Cards Per Section) ================= -->
         
-        <!-- Category: Politics (রাজনীতি) -->
+        <!-- ================= DYNAMIC CATEGORY SECTIONS ================= -->
+        {% for section in category_sections %}
         <div class="mb-16">
             <!-- Header -->
             <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
-                <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">রাজনীতি</div>
-                <button onclick="window.location.href='{% url 'category' 'politics' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
+                <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">{{ section.category.name }}</div>
+                <button onclick="window.location.href='{% url 'category' section.category.slug %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
                     আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
                 </button>
             </div>
             <!-- Grid Content -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                 {% for post in politics_posts %}
+                 {% for post in section.posts %}
                  <!-- Card -->
                  <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.category.slug post.slug %}'">
                     <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
@@ -81,176 +82,7 @@
                  {% endfor %}
             </div>
         </div>
-
-        <!-- Category: Sports (খেলা) -->
-        <div class="mb-16">
-            <!-- Header -->
-            <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
-                <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">খেলা</div>
-                <button onclick="window.location.href='{% url 'category' 'sports' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
-                    আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
-                </button>
-            </div>
-            <!-- Grid Content -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                 {% for post in sports_posts %}
-                 <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.category.slug post.slug %}'">
-                    <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
-                        {% if post.post_image %}
-                        <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
-                        {% else %}
-                        <div class="w-full h-full bg-stone-300 flex items-center justify-center text-stone-400"><iconify-icon icon="lucide:image" width="32"></iconify-icon></div>
-                        {% endif %}
-                    </div>
-                    <h3 class="text-lg font-bold text-charcoal group-hover:text-[#AA1C1C] transition-colors leading-snug line-clamp-2">
-                        {{ post.title }}
-                    </h3>
-                    <div class="flex items-center gap-2 text-[10px] text-stone-400">
-                        <span>{{ post.created_at|timesince }} আগে</span>
-                    </div>
-                 </article>
-                 {% empty %}
-                 <div class="col-span-4 text-center text-stone-400 py-8">এই বিভাগে কোনো লেখা পাওয়া যায়নি।</div>
-                 {% endfor %}
-            </div>
-        </div>
-
-        <!-- Category: Feature (ফিচার) -->
-        <div class="mb-16">
-            <!-- Header -->
-            <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
-                <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">ফিচার</div>
-                <button onclick="window.location.href='{% url 'category' 'featured' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
-                    আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
-                </button>
-            </div>
-            <!-- Grid Content -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                 {% for post in feature_posts %}
-                 <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.category.slug post.slug %}'">
-                    <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
-                        {% if post.post_image %}
-                        <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
-                        {% else %}
-                        <div class="w-full h-full bg-stone-300 flex items-center justify-center text-stone-400"><iconify-icon icon="lucide:image" width="32"></iconify-icon></div>
-                        {% endif %}
-                    </div>
-                    <h3 class="text-lg font-bold text-charcoal group-hover:text-[#AA1C1C] transition-colors leading-snug line-clamp-2">
-                        {{ post.title }}
-                    </h3>
-                    <div class="flex items-center gap-2 text-[10px] text-stone-400">
-                        <span>{{ post.created_at|timesince }} আগে</span>
-                    </div>
-                 </article>
-                 {% empty %}
-                 <div class="col-span-4 text-center text-stone-400 py-8">এই বিভাগে কোনো লেখা পাওয়া যায়নি।</div>
-                 {% endfor %}
-            </div>
-        </div>
-
-        <!-- Category: Opinion (মতামত) -->
-        <div class="mb-16">
-            <!-- Header -->
-            <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
-                <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">মতামত</div>
-                <button onclick="window.location.href='{% url 'category' 'opinion' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
-                    আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
-                </button>
-            </div>
-            <!-- Grid Content -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                 {% for post in opinion_posts %}
-                 <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.category.slug post.slug %}'">
-                    <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
-                        {% if post.post_image %}
-                        <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
-                        {% else %}
-                        <div class="w-full h-full bg-stone-300 flex items-center justify-center text-stone-400"><iconify-icon icon="lucide:image" width="32"></iconify-icon></div>
-                        {% endif %}
-                    </div>
-                    <h3 class="text-lg font-bold text-charcoal group-hover:text-[#AA1C1C] transition-colors leading-snug line-clamp-2">
-                        {{ post.title }}
-                    </h3>
-                    <div class="flex items-center gap-2 text-[10px] text-stone-400">
-                        <span>{{ post.created_at|timesince }} আগে</span>
-                    </div>
-                 </article>
-                 {% empty %}
-                 <div class="col-span-4 text-center text-stone-400 py-8">এই বিভাগে কোনো লেখা পাওয়া যায়নি।</div>
-                 {% endfor %}
-            </div>
-        </div>
-
-        <!-- Category: Entertainment (বিনোদন) -->
-        <div class="mb-16">
-            <!-- Header -->
-            <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
-                <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">বিনোদন</div>
-                <button onclick="window.location.href='{% url 'category' 'entertainment' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
-                    আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
-                </button>
-            </div>
-            <!-- Grid Content -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                 {% for post in entertainment_posts %}
-                 <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.category.slug post.slug %}'">
-                    <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
-                        {% if post.post_image %}
-                        <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
-                        {% else %}
-                        <div class="w-full h-full bg-stone-300 flex items-center justify-center text-stone-400"><iconify-icon icon="lucide:image" width="32"></iconify-icon></div>
-                        {% endif %}
-                    </div>
-                    <h3 class="text-lg font-bold text-charcoal group-hover:text-[#AA1C1C] transition-colors leading-snug line-clamp-2">
-                        {{ post.title }}
-                    </h3>
-                    <div class="flex items-center gap-2 text-[10px] text-stone-400">
-                        <span>{{ post.created_at|timesince }} আগে</span>
-                    </div>
-                 </article>
-                 {% empty %}
-                 <div class="col-span-4 text-center text-stone-400 py-8">এই বিভাগে কোনো লেখা পাওয়া যায়নি।</div>
-                 {% endfor %}
-            </div>
-        </div>
-
-        <!-- Category: International (আন্তর্জাতিক) -->
-        <div class="mb-16">
-            <!-- Header -->
-            <div class="flex items-center justify-between border-b-2 border-[#AA1C1C] mb-6">
-                <div class="bg-[#AA1C1C] text-white px-4 py-1.5 text-sm font-bold">আন্তর্জাতিক</div>
-                <button onclick="window.location.href='{% url 'category' 'international' %}'" class="text-xs font-bold text-stone-500 hover:text-[#AA1C1C] flex items-center gap-1">
-                    আরও <iconify-icon icon="lucide:chevron-right" width="12"></iconify-icon>
-                </button>
-            </div>
-             <!-- Grid Content -->
-             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                 {% for post in international_posts %}
-                 <!-- Card -->
-                 <article class="group cursor-pointer flex flex-col gap-2" onclick="window.location.href='{% url 'post' post.category.slug post.slug %}'">
-                    <div class="aspect-video bg-stone-200 rounded overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
-                        {% if post.post_image %}
-                        <img src="{{ post.post_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ post.title }}">
-                        {% else %}
-                        <div class="w-full h-full bg-stone-300 flex items-center justify-center text-stone-400"><iconify-icon icon="lucide:image" width="32"></iconify-icon></div>
-                        {% endif %}
-                    </div>
-                    <h3 class="text-lg font-bold text-charcoal group-hover:text-[#AA1C1C] transition-colors leading-snug line-clamp-2">
-                        {{ post.title }}
-                    </h3>
-                    <div class="flex items-center gap-2 text-[10px] text-stone-400">
-                        <span>{{ post.created_at|timesince }} আগে</span>
-                    </div>
-                 </article>
-                 {% empty %}
-                 <div class="col-span-4 text-center text-stone-400 py-8">এই বিভাগে কোনো লেখা পাওয়া যায়নি।</div>
-                 {% endfor %}
-            </div>
-        </div>
+        {% endfor %}
 
         <!-- ================= VIDEO / MULTIMEDIA ================= -->
         {% comment %} <div class="mb-20">
