@@ -200,6 +200,8 @@ AWS_QUERYSTRING_AUTH = True  # makes uploaded files publicly accessible
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Tailwind theme app config
 TAILWIND_APP_NAME = 'theme'
