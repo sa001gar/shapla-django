@@ -202,7 +202,7 @@ AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL')
 AWS_S3_REGION_NAME = 'auto'
 AWS_S3_ADDRESSING_STYLE = 'virtual'
-AWS_QUERYSTRING_AUTH = False  # makes uploaded files publicly accessible
+AWS_QUERYSTRING_AUTH = True  # makes uploaded files publicly accessible
 
 
 # Static files (CSS, JavaScript, Images)
