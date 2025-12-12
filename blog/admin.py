@@ -28,7 +28,7 @@ class AuthorAdmin(ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
-    list_display = ('title', 'author', 'category', 'created_at', 'updated_at')
+    list_display = ('title', 'author', 'category', 'will_be_in_hero', 'created_at', 'updated_at')
     list_select_related = ('author', 'category')
     search_fields = ('title', 'description')
     list_filter_submit = True
@@ -41,7 +41,7 @@ class PostAdmin(ModelAdmin):
 
     fieldsets = (
         ("General Information", {
-            "fields": ("title", "slug", "description"),
+            "fields": ("title", "slug", "description", "will_be_in_hero"),
         }),
         ("Content", {
             "fields": ("post_text", "post_image", "post_image_alt"),

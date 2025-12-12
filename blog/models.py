@@ -116,6 +116,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField(blank=True)
 
+    will_be_in_hero = models.BooleanField(default=False, help_text="Check this box if you want this post to be featured in the hero section.")
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='posts')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
     
