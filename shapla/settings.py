@@ -318,7 +318,7 @@ CKEDITOR_5_CONFIGS = {
                 'link', 'insertImage', 'mediaEmbed', 'blockQuote', 'insertTable', 'specialCharacters', 'horizontalLine', '|', 
                 'sourceEditing', 'maximize'
             ],
-            'shouldNotGroupWhenFull': False
+            'shouldNotGroupWhenFull': True
         },
         'image': {
             'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
