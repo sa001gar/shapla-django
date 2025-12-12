@@ -11,9 +11,9 @@ def index(request):
     # Fetch Hero Post (Latest "Editorial" or just latest post)
     # Assuming 'editorial' slug for hero or just first post for now. 
     # Let's try to find an 'editorial' category, else fallback to latest.
-    hero_post = Post.objects.filter(category__slug='editorial').select_related('author', 'category').first()
+    hero_post = Post.objects.filter(will_be_in_hero=True).select_related('author', 'category').first()
     if not hero_post:
-        hero_post = Post.objects.select_related('author', 'category').first()
+        hero_post = Post.objects.order_by('-created_at').select_related('author', 'category').first()
 
     # Helper to fetch posts by category slug
     def get_category_posts(slug):
