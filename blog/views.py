@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.cache import cache_page
 
 # Create your views here.
-@cache_page(60 * 15) # Cache for 15 minutes
+# @cache_page(60 * 15) # Cache for 15 minutes
 def index(request):
     # Fetch Hero Post (Latest "Editorial" or just latest post)
     # Assuming 'editorial' slug for hero or just first post for now. 
