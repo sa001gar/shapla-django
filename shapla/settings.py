@@ -310,11 +310,13 @@ CKEDITOR_5_CONFIGS = {
         'toolbar': {
             'items': [
                 'heading', '|', 
-                'bold', 'italic', 'underline', 'strikethrough', 'code', '|',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                'bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', 'code', 'removeFormat', '|',
+                'alignment', '|',
                 'bulletedList', 'numberedList', 'todoList', '|',
                 'outdent', 'indent', '|',
-                'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'horizontalLine', '|', 
-                'removeFormat', 'sourceEditing'
+                'link', 'insertImage', 'mediaEmbed', 'blockQuote', 'insertTable', 'specialCharacters', 'horizontalLine', '|', 
+                'sourceEditing', 'maximize'
             ],
             'shouldNotGroupWhenFull': False
         },
