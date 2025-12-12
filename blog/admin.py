@@ -29,6 +29,8 @@ class AuthorAdmin(ModelAdmin):
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
     list_display = ('title', 'author', 'category', 'created_at', 'updated_at')
+    list_select_related = ('author', 'category')
+    search_fields = ('title', 'description')
     list_filter_submit = True
     readonly_fields = ['created_at', 'updated_at']
     list_per_page = 25
